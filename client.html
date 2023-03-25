@@ -1,0 +1,41 @@
+<img id="camera" src="/img">
+<script>
+    speed = 0
+    const setSpeed = (val) => {
+        if (val != speed){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '/setSpeed?speed='+val, true);
+            xhttp.send();
+        }
+        speed = val
+    }
+
+    const turn = (val) => {
+        
+    }
+
+    window.onload = function() {
+        var image = document.getElementById("camera");
+
+        function updateImage() {
+            image.src = image.src.split("?")[0] + "?" + new Date().getTime();
+
+        }
+
+        setInterval(updateImage, 1000);
+    }
+
+    document.addEventListener('keydown', (e)=>{
+        c = e.code;
+        if (c=='KeyW'){
+            setSpeed(1);
+        }
+        if (c=='KeyS'){
+            setSpeed(-1);
+        }
+    })
+
+    document.addEventListener('keyup', (e)=>{
+        setSpeed(0)
+    })
+</script>
